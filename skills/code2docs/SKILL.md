@@ -18,6 +18,7 @@ Sibling skills (must be installed next to this folder):
 | Data flow (DFD) | `../code2docs-data-flow/` | `data-flow.md` |
 | Sequence diagrams | `../code2docs-sequence/` | `sequences.md` |
 | Product specification | `../code2docs-product-spec/` | `product-spec.md` |
+| Backlog (epics, features, user stories) | `../code2docs-backlog/` | `backlog/` folder |
 
 Paths below are relative to this skill's folder (`code2docs/`).
 
@@ -28,7 +29,7 @@ Follow `references/interview.md`. Summary:
 - Ask in rounds of at most 4 questions. Use a structured question tool if your agent has one (e.g. `AskUserQuestion`); otherwise ask in chat as a numbered list with the options shown, and **stop and wait** for the answer.
 - Do not re-ask anything the user already stated in the request.
 - Required answers before any scanning starts:
-  1. **Documents** — which of the 7 types (or "full pack").
+  1. **Documents** — which of the 7 types (or "full pack"), and whether to also build a **re-implementation backlog** (user stories) from them.
   2. **Detail level** — Overview / Standard / Deep (see `references/detail-levels.md`).
   3. **Source** — code repository path(s), RAG via MCP tool, RAG files on disk, or a combination — plus the concrete location (path, MCP tool name, folder).
   4. **Diagram notation(s)** — Mermaid, PlantUML (C4-PlantUML for block diagrams), draw.io; one or several.
@@ -58,7 +59,9 @@ At Standard and Deep level, show the user a 5–10 line summary of what was foun
 
 For each selected document, read the sibling `SKILL.md` and follow it. Order (later docs reuse earlier ones):
 
-io-inventory → data-model → api-spec → block-diagram → data-flow → sequence → product-spec
+io-inventory → data-model → api-spec → block-diagram → data-flow → sequence → product-spec → backlog
+
+The backlog needs field-level mapping: if it is requested, make sure product-spec, io-inventory, data-model and api-spec are included (add sequences for error paths) and recommend Deep level. The backlog skill runs its own short interview (scope, gap stories, personas) — pass it the answers already collected so it does not re-ask them.
 
 If your agent can run subagents, documents after `io-inventory` may be produced in parallel — give each subagent the brief path and the evidence folder.
 

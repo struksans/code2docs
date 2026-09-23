@@ -9,6 +9,7 @@ Agent Skills for **Claude Code** and **GitHub Copilot** that generate product an
 - sequence diagrams
 - data model / ERD
 - API / interface specification
+- **re-implementation backlog**: epics, features and user stories that a team can use to rebuild the features elsewhere
 
 Diagrams are produced as **Mermaid**, **PlantUML** (C4-PlantUML) and/or **draw.io**.
 
@@ -26,8 +27,27 @@ Before doing any work the skill **interviews you**: which documents, what detail
 | `code2docs-data-flow` | Data flow diagrams |
 | `code2docs-sequence` | Sequence diagrams |
 | `code2docs-product-spec` | Product specification |
+| `code2docs-backlog` | Business analyst: spec → epics / features / user stories |
 
 Sub-skills can also be used on their own; they reuse the settings in `code2docs-brief.md` if it exists, or ask a short set of questions.
+
+## Code → spec → backlog
+
+1. `code2docs` scans the code or RAG index and writes the spec (use **Deep** level with product spec, I/O inventory, data model, API spec and sequences).
+2. `code2docs-backlog` reads that spec and writes a backlog:
+   - Epic → Feature → Story, "As a … I want … so that …";
+   - **Gherkin** acceptance criteria (happy path, validation, errors, authorisation);
+   - stories describe behaviour without naming a technology, but each one has a **data & interface mapping** table naming the legacy DB columns, REST fields, SOAP elements, message fields and file columns to map, with types, validation rules and schemas;
+   - **dependencies** between stories and an **implementation order** in waves;
+   - **gap stories** for missing validation, security issues and inconsistencies found in the legacy code (not parity; the product owner decides);
+   - a **traceability** table from requirements, operations and entities to stories.
+
+```
+backlog/
+  README.md  epics/E01-<slug>.md  gaps.md  implementation-order.md  traceability.md
+```
+
+`python3 skills/code2docs-backlog/scripts/check_backlog.py <backlog> --spec <spec-dir> --write-order` checks the backlog: story IDs, missing dependencies, dependency cycles, missing Gherkin scenarios, mapping and evidence, and spec items no story covers. It also computes the waves.
 
 ## Install
 
@@ -53,6 +73,7 @@ In VS Code make sure agent skills are enabled (`chat.useAgentSkills`) if your ve
 /code2docs                                  # Claude Code slash command
 Document the repo in ./services/orders: data flow and block diagram, standard detail
 Build a product spec from our RAG index (MCP tool "kb_search"), overview level, output to docs/spec
+Create user stories from the spec in docs/spec so we can rebuild the order module in the new platform
 ```
 
 Output (in the directory you choose):

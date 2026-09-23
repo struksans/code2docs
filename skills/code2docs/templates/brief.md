@@ -6,7 +6,7 @@
 |---|---|
 | System name | <name> |
 | One-line description | <text> |
-| Documents | <product-spec, io-inventory, data-flow, block-diagram, sequence, data-model, api-spec> |
+| Documents | <product-spec, io-inventory, data-flow, block-diagram, sequence, data-model, api-spec, backlog> |
 | Detail level | <Overview \| Standard \| Deep> |
 | Source type | <code \| rag-mcp \| rag-files> (one or more) |
 | Code path(s) | <path, path> |
@@ -18,6 +18,7 @@
 | Output directory | <path> |
 | Audience | <business \| architects \| developers \| auditors> |
 | Document language | <English> |
+| Backlog scope | <all \| epics/modules list \| n/a>; gap stories <yes \| no>; personas <from spec \| list> |
 | Python available | <yes (command) \| no> |
 | Date | <YYYY-MM-DD> |
 

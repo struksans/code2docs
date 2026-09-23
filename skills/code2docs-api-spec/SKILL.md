@@ -13,7 +13,7 @@ Same as every code2docs sub-skill: read `code2docs-brief.md` from the output dir
 
 ## 1. Collect
 
-1. **Existing contracts first** (inventory `contracts`): OpenAPI/Swagger, AsyncAPI, `.proto`, GraphQL SDL, Avro, JSON Schema. If a contract exists, summarise it and link to it; verify against code and note differences.
+1. **Existing contracts first** (inventory `contracts`): OpenAPI/Swagger, WSDL/XSD (SOAP web services), AsyncAPI, `.proto`, GraphQL SDL, Avro, JSON Schema. If a contract exists, summarise it and link to it; verify against code and note differences.
 2. **Provided interfaces** (this app is the server/producer): `http_routes`, GraphQL resolvers, gRPC services, WebSocket handlers, topics it publishes, files it exports.
 3. **Consumed interfaces** (this app is the client/consumer): `http_clients`, topics it consumes, files it imports.
 4. For each operation open the handler and find: path/topic, method, path/query/header params, request body type, response type(s) and status codes, auth (middleware, decorators, `[Authorize]`, `@PreAuthorize`, API keys), validation, idempotency, pagination, errors raised.
@@ -33,6 +33,8 @@ Source · Level · Date
 | Method | Path | Purpose | Auth | Request | Response | Errors | Evidence |
 #### <METHOD path>             (Deep: one section per operation)
 Parameters table · Request schema · Response schema(s) · Error codes · Example (only if found in code/tests/RAG, otherwise mark as illustrative)
+### <Service name> (SOAP web service)
+| Operation | SOAP action | Input message / elements | Output message | Faults | Auth (WS-Security, basic, mTLS) | Evidence |
 ### <Topic / queue> (messaging)
 | Topic | Direction | Message type | Key | Schema | Delivery semantics | Evidence |
 ## Consumed interfaces      (same structure; include timeouts/retries if found)

@@ -13,6 +13,7 @@ Goal: collect everything needed to produce the documents **before** reading the 
 - Data model / ERD — entities, fields, relations
 - API / interface spec — endpoints, messages, contracts
 - Full pack — all of the above
+- Backlog — epics, features and user stories for re-implementing the application elsewhere (needs product spec, I/O inventory, data model and API spec; Deep level recommended)
 
 **Q2. What level of detail?**
 - Overview — for stakeholders; context level, 1 diagram per document, ~1–2 pages each

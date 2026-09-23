@@ -61,6 +61,8 @@ MAX_FILE_BYTES = 1_000_000
 CONTRACT_FILES = [
     ("openapi", re.compile(r"(openapi|swagger)[^/]*\.(ya?ml|json)$", re.I)),
     ("asyncapi", re.compile(r"asyncapi[^/]*\.(ya?ml|json)$", re.I)),
+    ("wsdl", re.compile(r"\.wsdl$", re.I)),
+    ("xsd", re.compile(r"\.xsd$", re.I)),
     ("protobuf", re.compile(r"\.proto$", re.I)),
     ("graphql", re.compile(r"\.(graphql|gql)$", re.I)),
     ("avro", re.compile(r"\.avsc$", re.I)),
@@ -103,6 +105,7 @@ PATTERNS = [
     ("http_routes", "jaxrs", R(r"@Path\(\s*\"([^\"]*)\"\)"), "path:1"),
     ("http_routes", "graphql", R(r"\b(type\s+(Query|Mutation|Subscription)\b|@(Query|Mutation|Resolver|Subscription)\()"), None),
     ("http_routes", "grpc-service", R(r"^\s*service\s+(\w+)\s*\{"), 1),
+    ("http_routes", "soap-service", R(r"(@WebService\b|@WebMethod\b|@Endpoint\b|@PayloadRoot\(|\[ServiceContract\b|\[OperationContract\b|\bspyne\b|@rpc\(|\bsoap\.listen\(|\bSoapServer\b|\.asmx\b|\[WebMethod\b)"), None),
     ("http_routes", "websocket", R(r"\b(WebSocketServer|socket\.io|@WebSocketGateway|SignalR|MapHub<|websockets\.serve)"), None),
 
     # ---- CLI
@@ -178,6 +181,7 @@ PATTERNS = [
     ("http_clients", "python-async", R(r"\baiohttp\.ClientSession|httpx\.(Async)?Client\("), None),
     ("http_clients", "node", R(r"\b(axios(\.(get|post|put|patch|delete|create))?|fetch|got|superagent)\(\s*(['\"`]([^'\"`]+)['\"`])?"), 5),
     ("http_clients", "java", R(r"\b(RestTemplate|WebClient|@FeignClient|OkHttpClient|HttpClient\.new|RestClient)\b(\(\s*(name|url)\s*=\s*\"([^\"]+)\")?"), 4),
+    ("http_clients", "soap-client", R(r"\b(zeep\.Client|suds\.client|soap\.createClient(Async)?|SoapClient|WebServiceTemplate|JaxWsProxyFactoryBean|Service\.create\(|ChannelFactory<|ClientBase<|\?wsdl)"), None),
     ("http_clients", "dotnet", R(r"\b(HttpClient|IHttpClientFactory|RestSharp|Refit)\b"), None),
     ("http_clients", "go", R(r"\bhttp\.(Get|Post|NewRequest(WithContext)?)\(\s*(\"([^\"]+)\")?"), 4),
     ("http_clients", "url-literal", R(r"['\"`](https?://[^'\"`\s{}$]+)['\"`]"), 1),

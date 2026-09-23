@@ -26,6 +26,7 @@ Categories and patterns (regex, case-sensitive unless noted):
 - Spring: `@(Get|Post|Put|Patch|Delete|Request)Mapping`
 - ASP.NET: `\[(Http(Get|Post|Put|Patch|Delete)|Route)`, `Map(Get|Post|Put|Patch|Delete)\(`
 - Go: `HandleFunc\(`, `\.(GET|POST|PUT|PATCH|DELETE)\(\s*"`
+- SOAP web services: `@WebService|@WebMethod|@Endpoint|@PayloadRoot` (Java JAX-WS / Spring-WS), `\[ServiceContract|\[OperationContract|\[WebMethod|\.asmx` (.NET WCF/ASMX), `spyne|@rpc\(` (Python), `soap\.listen\(` (Node)
 - GraphQL: `type Query`, `type Mutation`, `@(Query|Mutation|Resolver)\(`
 
 ## cli_args
@@ -47,7 +48,7 @@ Drivers/clients: `psycopg|asyncpg|pymysql|sqlite3|sqlalchemy|pymongo|redis|elast
 `KafkaProducer|KafkaConsumer|@KafkaListener|kafkajs|confluent_kafka|sarama`, `pika|amqplib|RabbitTemplate|@RabbitListener`, `sqs|sns|SQSClient|SNSClient`, `ServiceBusClient|EventHubProducerClient`, `PubSub|pubsub_v1`, `nats|redis.*(publish|subscribe)`, `celery|@shared_task|bull|BullMQ`
 
 ## http_clients (outbound)
-`requests\.(get|post|put|delete)|httpx|aiohttp`, `axios|fetch\(|got\(`, `RestTemplate|WebClient|FeignClient|OkHttp`, `HttpClient`, `http\.(Get|Post|NewRequest)`
+`requests\.(get|post|put|delete)|httpx|aiohttp`, `axios|fetch\(|got\(`, `RestTemplate|WebClient|FeignClient|OkHttp`, `HttpClient`, `http\.(Get|Post|NewRequest)`; SOAP clients: `zeep|suds|soap\.createClient|WebServiceTemplate|JaxWsProxyFactoryBean|ChannelFactory<|ClientBase<|\?wsdl`
 
 ## schedulers
 `@Scheduled|cron|schedule\.every|APScheduler|setInterval|node-cron|Quartz|BackgroundService|IHostedService|CronJob`
@@ -56,6 +57,6 @@ Drivers/clients: `psycopg|asyncpg|pymysql|sqlite3|sqlalchemy|pymongo|redis|elast
 React Router `<Route|createBrowserRouter`, Next.js `pages/` `app/**/page.tsx`, Angular `Routes = \[`, Vue `createRouter`
 
 ## contracts
-Files: `*openapi*.y?ml|*swagger*.json|*.proto|*.graphql|*.gql|*asyncapi*|*.avsc|*.schema.json|migrations/**|*.sql`
+Files: `*openapi*.y?ml|*swagger*.json|*.wsdl|*.xsd|*.proto|*.graphql|*.gql|*asyncapi*|*.avsc|*.schema.json|migrations/**|*.sql`
 
 After grepping, open the top hits per category to confirm; discard matches in tests, examples and comments unless the user asked to include tests.
